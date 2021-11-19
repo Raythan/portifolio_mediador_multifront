@@ -60,10 +60,12 @@ namespace windows_form_ui
                 { "Quiz", (int)cboQuizNivel.SelectedValue },
                 { "Forca", (int)cboForcaNivel.SelectedValue }
             };
+
             Dictionary<string, int> tiposInterno = new Dictionary<string, int>
             {
                 { "Jogo da Velha", (int)cboJogoDaVelhaTipoJogo.SelectedValue }
             };
+
             configuracao = new Configuracao(niveisInterno, tiposInterno);
         }
     }

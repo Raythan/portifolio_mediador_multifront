@@ -29,6 +29,7 @@ namespace windows_form_ui
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.cboSelecaoTelaPrincipal = new System.Windows.Forms.ComboBox();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.SuspendLayout();
@@ -58,6 +59,7 @@ namespace windows_form_ui
             this.Controls.Add(this.panelPrincipal);
             this.Controls.Add(this.cboSelecaoTelaPrincipal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPrincipal";

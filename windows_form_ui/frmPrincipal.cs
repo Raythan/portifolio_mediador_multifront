@@ -16,30 +16,27 @@ namespace windows_form_ui
         private Form form;
         private Configuracao configuracao = new Configuracao(new Dictionary<string, int>(), new Dictionary<string, int>());
         private Dictionary<string, int> telas;
-
         private Dictionary<int, Form> formularios;
+        private int formInicial = 2;
 
         public frmPrincipal()
         {
             InitializeComponent();
+            CarregarDicionarios();
             CarregarTelasDeSelecao();
-            CarregarFormularios();
             Text = titulo;
         }
 
-        private void CarregarFormularios()
+        private void CarregarDicionarios()
         {
             formularios = new Dictionary<int, Form>
             {
                 { 0, new frmConfiguracao(configuracao)},
-                { 1, new frmConfiguracao(configuracao)},
-                { 2, new frmConfiguracao(configuracao)},
-                { 3, new frmConfiguracao(configuracao)}
+                { 1, new frmJogoDaVelha()},
+                { 2, new frmForca()},
+                { 3, new frmQuiz()}
             };
-        }
 
-        private void CarregarTelasDeSelecao()
-        {
             telas = new Dictionary<string, int>
             {
                 { "Configuração", 0},
@@ -47,15 +44,20 @@ namespace windows_form_ui
                 { "Forca", 2},
                 { "Quiz", 3}
             };
+        }
+
+        private void CarregarTelasDeSelecao()
+        {
             if (telas.Count() != formularios.Count())
             {
                 MessageBox.Show("Quantidade de menus cadastrados diferente da quantidade de formularios", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new Exception(); 
+                throw new Exception();
             }
-            
+
             cboSelecaoTelaPrincipal.DataSource = new BindingSource(telas, null);
             cboSelecaoTelaPrincipal.DisplayMember = "Key";
             cboSelecaoTelaPrincipal.ValueMember = "Value";
+            cboSelecaoTelaPrincipal.SelectedValue = formInicial;
         }
 
         private void cboSelecaoTela_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,16 +67,31 @@ namespace windows_form_ui
                 if (panelPrincipal.Controls.Count > 0)
                     panelPrincipal.Controls.RemoveAt(0);
 
-                formularios.TryGetValue((int)cboSelecaoTelaPrincipal.SelectedValue, out form);
+                try
+                {
+                    formularios.TryGetValue((int)cboSelecaoTelaPrincipal.SelectedValue, out form);
+                }
+                catch
+                {
+                    formularios.TryGetValue(formInicial, out form);
+                }
+                
                 form.TopLevel = false;
                 form.AutoScroll = true;
                 panelPrincipal.Controls.Add(form);
                 form.Show();
-                Text = $"{titulo} - {cboSelecaoTelaPrincipal.SelectedText}";
+                Text = $"{titulo} - {cboSelecaoTelaPrincipal.Text}";
             }
             catch (Exception ex)
             {
-                // Inserir formulário de erro
+                form = new frmErro(ex)
+                {
+                    TopLevel = false,
+                    AutoScroll = true
+                };
+                panelPrincipal.Controls.Add(form);
+                form.Show();
+                Text = $"{titulo} - Erro";
             }
         }
     }

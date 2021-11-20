@@ -30,7 +30,7 @@ namespace windows_form_ui
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmForca));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.picForca = new System.Windows.Forms.PictureBox();
             this.txtLetrasUtilizadas = new System.Windows.Forms.TextBox();
             this.txtPalavraSecreta = new System.Windows.Forms.TextBox();
@@ -65,10 +65,12 @@ namespace windows_form_ui
             // 
             this.txtLetrasUtilizadas.BackColor = System.Drawing.SystemColors.Control;
             this.txtLetrasUtilizadas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLetrasUtilizadas.Enabled = false;
             this.txtLetrasUtilizadas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLetrasUtilizadas.Location = new System.Drawing.Point(111, 12);
             this.txtLetrasUtilizadas.Multiline = true;
             this.txtLetrasUtilizadas.Name = "txtLetrasUtilizadas";
+            this.txtLetrasUtilizadas.ReadOnly = true;
             this.txtLetrasUtilizadas.Size = new System.Drawing.Size(277, 57);
             this.txtLetrasUtilizadas.TabIndex = 2;
             this.txtLetrasUtilizadas.Text = "A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U" +
@@ -78,9 +80,11 @@ namespace windows_form_ui
             // txtPalavraSecreta
             // 
             this.txtPalavraSecreta.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPalavraSecreta.Enabled = false;
             this.txtPalavraSecreta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPalavraSecreta.Location = new System.Drawing.Point(12, 82);
             this.txtPalavraSecreta.Name = "txtPalavraSecreta";
+            this.txtPalavraSecreta.ReadOnly = true;
             this.txtPalavraSecreta.Size = new System.Drawing.Size(376, 19);
             this.txtPalavraSecreta.TabIndex = 3;
             this.txtPalavraSecreta.Text = ":: PALAVRA SECRETA ::";
@@ -103,14 +107,14 @@ namespace windows_form_ui
             this.COL3,
             this.COL4,
             this.COL5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridLetras.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridLetras.DefaultCellStyle = dataGridViewCellStyle12;
             this.gridLetras.Location = new System.Drawing.Point(12, 107);
             this.gridLetras.MultiSelect = false;
             this.gridLetras.Name = "gridLetras";
@@ -250,8 +254,10 @@ namespace windows_form_ui
             this.Controls.Add(this.txtLetrasUtilizadas);
             this.Controls.Add(this.picForca);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "frmForca";
             this.Text = "frmForca";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmForca_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picForca)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLetras)).EndInit();
             this.ResumeLayout(false);

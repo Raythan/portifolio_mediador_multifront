@@ -158,6 +158,12 @@
         lFtnrQFjts6adfO0ldDs5mlzbp+3Bgy2z3fo8D+cx8XqCH9F3AAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="txtLetrasUtilizadas.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtPalavraSecreta.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="COL1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

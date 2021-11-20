@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuracao.cs" />
+    <Compile Include="Extender.cs" />
     <Compile Include="frmConfiguracao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +127,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="palavras_forca.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="imagens\carrasco.png" />
     <Content Include="imagens\carrasco_32x32.png" />
   </ItemGroup>

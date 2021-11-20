@@ -14,13 +14,14 @@ namespace windows_form_ui
     {
         string palavraSecreta = string.Empty;
         List<string> letrasUtilizadas = new List<string>();
+        List<string> palavrasPermitidas = Extender.LerArquivoEmAssembly("palavras_forca.txt", ',');
         int chances, acertos, erros = 0;
         public frmForca()
         {
             InitializeComponent();
             IniciaJogo();
+            Focus();
         }
-
         private void CarregarPalavraSecreta()
         {
             txtPalavraSecreta.Text = "";
@@ -70,39 +71,6 @@ namespace windows_form_ui
                 lblStatusJogo.Text = "Você já pressionou essa letra!";
                 //MessageBox.Show("Você já pressionou essa letra!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-        private void gridLetras_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            string letraSelecionada = Convert.ToString(gridLetras.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            
-            if (!string.IsNullOrEmpty(letraSelecionada))
-            {
-                if (!AnalisaJogadas())
-                    return;
-
-                lblStatusJogo.Text = $"Apertou letra {letraSelecionada}.";
-                if (palavraSecreta.Contains(letraSelecionada))
-                {
-                    AtualizaContagem(true, letraSelecionada);
-                    StringBuilder palavraNova = new StringBuilder();
-                    var palavraSecretaArray = palavraSecreta.ToArray();
-                    var txtPalavraSecretaArray = txtPalavraSecreta.Text.ToArray();
-
-                    for (int i = 0; i < palavraSecretaArray.Count(); i++)
-                        palavraNova.Append(palavraSecretaArray[i].ToString().Equals(letraSelecionada) ? $"{letraSelecionada}" : $"{txtPalavraSecretaArray[i]}");
-
-                    gridLetras.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.SelectionBackColor = Color.Green;
-                    gridLetras.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Green;
-                    txtPalavraSecreta.Text = palavraNova.ToString();
-                }
-                else
-                {
-                    AtualizaContagem(false, letraSelecionada);
-                    gridLetras.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.SelectionBackColor = Color.Red;
-                    gridLetras.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
-                }
-                AtualizaLetrasUtilizadas(letraSelecionada);
-            }
-        }
         private void AtualizaContagem(bool valor, string letra)
         {
             if (!VerificaLetraJaPressionada(letra))
@@ -138,7 +106,7 @@ namespace windows_form_ui
         {
             if (chances <= 0)
             {
-                lblStatusJogo.Text = "Fim de jogo, você perdeu!";
+                lblStatusJogo.Text = $"Fim de jogo, você perdeu!\r\nPalavra correta {palavraSecreta}";
                 //MessageBox.Show("Fim de jogo, você perdeu!", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return false;
             }
@@ -152,7 +120,51 @@ namespace windows_form_ui
 
             return true;
         }
-        private void NovaPalavra() => palavraSecreta = "ESPIRIGUIDIBERTO";
+        private void AnalisaAcaoDoJogador(int rowIndex, int colIndex)
+        {
+            string letraSelecionada = Convert.ToString(gridLetras.Rows[rowIndex].Cells[colIndex].Value);
+            Color color = Color.Red;
+
+            if (!string.IsNullOrEmpty(letraSelecionada))
+            {
+                if (!AnalisaJogadas())
+                    return;
+
+                lblStatusJogo.Text = $"Apertou letra {letraSelecionada}.";
+                if (palavraSecreta.Contains(letraSelecionada))
+                {
+                    AtualizaContagem(true, letraSelecionada);
+                    StringBuilder palavraNova = new StringBuilder();
+                    var palavraSecretaArray = palavraSecreta.ToArray();
+                    var txtPalavraSecretaArray = txtPalavraSecreta.Text.ToArray();
+
+                    for (int i = 0; i < palavraSecretaArray.Count(); i++)
+                        palavraNova.Append(palavraSecretaArray[i].ToString().Equals(letraSelecionada) ? $"{letraSelecionada}" : $"{txtPalavraSecretaArray[i]}");
+
+                    color = Color.Green;
+                    txtPalavraSecreta.Text = palavraNova.ToString();
+                }
+                else
+                    AtualizaContagem(false, letraSelecionada);
+
+                gridLetras.Rows[rowIndex].Cells[colIndex].Style.SelectionBackColor = color;
+                gridLetras.Rows[rowIndex].Cells[colIndex].Style.BackColor = color;
+                AtualizaLetrasUtilizadas(letraSelecionada);
+            }
+        }
+        private void NovaPalavra()
+        {
+            Random rd = new Random();
+            palavraSecreta = palavrasPermitidas[rd.Next(0, palavrasPermitidas.Count())];
+        }
+        private void gridLetras_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) => AnalisaAcaoDoJogador(e.RowIndex, e.ColumnIndex);
+        private void frmForca_KeyDown(object sender, KeyEventArgs e)
+        {
+            for (int i = 0; i < gridLetras.Rows.Count; i++)
+                for (int j = 0; j < gridLetras.Columns.Count; j++)
+                    if (Convert.ToString(gridLetras.Rows[i].Cells[j].Value).Equals(Convert.ToString(e.KeyCode)))
+                        AnalisaAcaoDoJogador(i, j);
+        }
         private bool VerificaLetraJaPressionada(string letra) => letrasUtilizadas.Contains(letra);
         private void btnIniciaJogo_Click(object sender, EventArgs e) => IniciaJogo();
     }

@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace windows_form_ui
 {
     public class Configuracao
     {
+        [JsonIgnore]
         public string jsonFile = "configuracao.txt";
-        public List<string> jogos
+        [JsonIgnore]
+        public List<string> jogos = new List<string>()
         {
-            get
-            {
-                return jogosStatic;
-            }
-        }
+            "Jogo da Velha",
+            "Quiz",
+            "Forca"
+        };
+        [JsonIgnore]
         private static List<string> jogosStatic = new List<string>()
         {
             "Jogo da Velha",

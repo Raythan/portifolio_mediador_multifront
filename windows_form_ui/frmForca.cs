@@ -14,13 +14,14 @@ namespace windows_form_ui
     {
         string palavraSecreta = string.Empty;
         List<string> letrasUtilizadas = new List<string>();
-        List<string> palavrasPermitidas = Extender.LerArquivoEmAssembly("palavras_forca.txt", ',');
+        List<string> palavrasPermitidas;
         int chances, acertos, erros = 0;
-        public frmForca()
-        {
+        int level = 0;
+        public frmForca(Configuracao configuracao)
+        {   
             InitializeComponent();
+            level = configuracao.niveisUtilizados["Forca"];
             IniciaJogo();
-            Focus();
         }
         private void CarregarPalavraSecreta()
         {
@@ -95,12 +96,26 @@ namespace windows_form_ui
         }
         private void IniciaJogo()
         {
+            CarregaPalavrasPermitidasOnlineOffline();
             NovaPalavra();
             CarregarLetrasGrid();
             CarregarPalavraSecreta();
             IniciaContagem();
             LimpaLetrasUtilizadas();
             lblStatusJogo.Text = "Jogo iniciado!";
+        }
+        private void CarregaPalavrasPermitidasOnlineOffline()
+        {
+            try
+            {
+                lblStatusJogo.Text = "Procurando palavra...";
+                palavrasPermitidas = Request.Get("https://raw.githubusercontent.com/Raythan/portifolio_mediador_multifront/main/windows_form_ui/palavras_forca.txt", "github")
+                    .Split(',').ToList();
+            }
+            catch
+            {
+                palavrasPermitidas = Extender.LerArquivoEmAssembly("palavras_forca.txt", ',');
+            }
         }
         private bool AnalisaJogadas()
         {

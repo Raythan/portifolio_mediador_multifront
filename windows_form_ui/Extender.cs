@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace windows_form_ui
 {
@@ -32,5 +30,9 @@ namespace windows_form_ui
         {
             return File.ReadAllText($"{AssemblyDirectory}\\{nomeArquivo}").Split(separador).ToList();
         }
+        public static T LerArquivoEmAssembly<T>(string nomeArquivo) => JsonConvert.DeserializeObject<T>(File.ReadAllText($"{AssemblyDirectory}\\{nomeArquivo}"));
+        public static bool ExisteArquivo(string nomeArquivo) => File.Exists($"{AssemblyDirectory}\\{nomeArquivo}");
+        public static void CriaArquivo(string nomeArquivo) => File.Create($"{AssemblyDirectory}\\{nomeArquivo}").Dispose();
+        public static void EscreveObjetoAssembly(string nomeArquivo, object objeto) => File.WriteAllText($"{AssemblyDirectory}\\{nomeArquivo}", JsonConvert.SerializeObject(objeto));
     }
 }

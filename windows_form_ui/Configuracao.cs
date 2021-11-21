@@ -8,13 +8,52 @@ namespace windows_form_ui
 {
     public class Configuracao
     {
-        public Dictionary<string, int> niveis;
-        public Dictionary<string, int> tipos;
-
-        public Configuracao(Dictionary<string, int> niveis, Dictionary<string, int> tipos)
+        public string jsonFile = "configuracao.txt";
+        public List<string> jogos
         {
-            this.niveis = niveis;
-            this.tipos = tipos;
+            get
+            {
+                return jogosStatic;
+            }
         }
+        private static List<string> jogosStatic = new List<string>()
+        {
+            "Jogo da Velha",
+            "Quiz",
+            "Forca"
+        };
+        public Dictionary<string, int> niveisDominio
+        {
+            get
+            {
+                return new Dictionary<string, int>
+                {
+                    { "Facil", 0},
+                    { "Medio", 1},
+                    { "Dificil", 2}
+                };
+            }
+        }
+        public Dictionary<string, int> tiposDominio
+        {
+            get
+            {
+                return new Dictionary<string, int>
+                {
+                    { "Individual", 0},
+                    { "Dupla", 1}
+                };
+            }
+        }
+        public Dictionary<string, int> niveisUtilizados { get; set; } = new Dictionary<string, int>
+        {
+            { jogosStatic[0], 0 },
+            { jogosStatic[1], 0 },
+            { jogosStatic[2], 0 }
+        };
+        public Dictionary<string, int> tiposUtilizados { get; set; } = new Dictionary<string, int>
+        {
+            { jogosStatic[0], 0 }
+        };
     }
 }

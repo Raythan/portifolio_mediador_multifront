@@ -31,15 +31,16 @@ namespace windows_form_ui
         {
             this.lblJogoDaVelhaNivel = new System.Windows.Forms.Label();
             this.grpNivelDificuldade = new System.Windows.Forms.GroupBox();
-            this.lblForcaNivel = new System.Windows.Forms.Label();
-            this.lblQuizNivel = new System.Windows.Forms.Label();
-            this.cboJogoDaVelhaNivel = new System.Windows.Forms.ComboBox();
-            this.cboForcaNivel = new System.Windows.Forms.ComboBox();
             this.cboQuizNivel = new System.Windows.Forms.ComboBox();
+            this.cboForcaNivel = new System.Windows.Forms.ComboBox();
+            this.cboJogoDaVelhaNivel = new System.Windows.Forms.ComboBox();
+            this.lblQuizNivel = new System.Windows.Forms.Label();
+            this.lblForcaNivel = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.grpTipoJogo = new System.Windows.Forms.GroupBox();
             this.cboJogoDaVelhaTipoJogo = new System.Windows.Forms.ComboBox();
             this.lblJogoDaVelhaTipoJogo = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.grpNivelDificuldade.SuspendLayout();
             this.grpTipoJogo.SuspendLayout();
             this.SuspendLayout();
@@ -68,32 +69,14 @@ namespace windows_form_ui
             this.grpNivelDificuldade.TabStop = false;
             this.grpNivelDificuldade.Text = "Nível de dificuldade";
             // 
-            // lblForcaNivel
+            // cboQuizNivel
             // 
-            this.lblForcaNivel.AutoSize = true;
-            this.lblForcaNivel.Location = new System.Drawing.Point(47, 53);
-            this.lblForcaNivel.Name = "lblForcaNivel";
-            this.lblForcaNivel.Size = new System.Drawing.Size(34, 13);
-            this.lblForcaNivel.TabIndex = 1;
-            this.lblForcaNivel.Text = "Forca";
-            // 
-            // lblQuizNivel
-            // 
-            this.lblQuizNivel.AutoSize = true;
-            this.lblQuizNivel.Location = new System.Drawing.Point(53, 82);
-            this.lblQuizNivel.Name = "lblQuizNivel";
-            this.lblQuizNivel.Size = new System.Drawing.Size(28, 13);
-            this.lblQuizNivel.TabIndex = 2;
-            this.lblQuizNivel.Text = "Quiz";
-            // 
-            // cboJogoDaVelhaNivel
-            // 
-            this.cboJogoDaVelhaNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboJogoDaVelhaNivel.FormattingEnabled = true;
-            this.cboJogoDaVelhaNivel.Location = new System.Drawing.Point(87, 23);
-            this.cboJogoDaVelhaNivel.Name = "cboJogoDaVelhaNivel";
-            this.cboJogoDaVelhaNivel.Size = new System.Drawing.Size(121, 21);
-            this.cboJogoDaVelhaNivel.TabIndex = 3;
+            this.cboQuizNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboQuizNivel.FormattingEnabled = true;
+            this.cboQuizNivel.Location = new System.Drawing.Point(87, 79);
+            this.cboQuizNivel.Name = "cboQuizNivel";
+            this.cboQuizNivel.Size = new System.Drawing.Size(121, 21);
+            this.cboQuizNivel.TabIndex = 5;
             // 
             // cboForcaNivel
             // 
@@ -104,14 +87,32 @@ namespace windows_form_ui
             this.cboForcaNivel.Size = new System.Drawing.Size(121, 21);
             this.cboForcaNivel.TabIndex = 4;
             // 
-            // cboQuizNivel
+            // cboJogoDaVelhaNivel
             // 
-            this.cboQuizNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboQuizNivel.FormattingEnabled = true;
-            this.cboQuizNivel.Location = new System.Drawing.Point(87, 79);
-            this.cboQuizNivel.Name = "cboQuizNivel";
-            this.cboQuizNivel.Size = new System.Drawing.Size(121, 21);
-            this.cboQuizNivel.TabIndex = 5;
+            this.cboJogoDaVelhaNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboJogoDaVelhaNivel.FormattingEnabled = true;
+            this.cboJogoDaVelhaNivel.Location = new System.Drawing.Point(87, 23);
+            this.cboJogoDaVelhaNivel.Name = "cboJogoDaVelhaNivel";
+            this.cboJogoDaVelhaNivel.Size = new System.Drawing.Size(121, 21);
+            this.cboJogoDaVelhaNivel.TabIndex = 3;
+            // 
+            // lblQuizNivel
+            // 
+            this.lblQuizNivel.AutoSize = true;
+            this.lblQuizNivel.Location = new System.Drawing.Point(53, 82);
+            this.lblQuizNivel.Name = "lblQuizNivel";
+            this.lblQuizNivel.Size = new System.Drawing.Size(28, 13);
+            this.lblQuizNivel.TabIndex = 2;
+            this.lblQuizNivel.Text = "Quiz";
+            // 
+            // lblForcaNivel
+            // 
+            this.lblForcaNivel.AutoSize = true;
+            this.lblForcaNivel.Location = new System.Drawing.Point(47, 53);
+            this.lblForcaNivel.Name = "lblForcaNivel";
+            this.lblForcaNivel.Size = new System.Drawing.Size(34, 13);
+            this.lblForcaNivel.TabIndex = 1;
+            this.lblForcaNivel.Text = "Forca";
             // 
             // btnSalvar
             // 
@@ -152,11 +153,21 @@ namespace windows_form_ui
             this.lblJogoDaVelhaTipoJogo.TabIndex = 0;
             this.lblJogoDaVelhaTipoJogo.Text = "Jogo da Velha";
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(18, 230);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(47, 13);
+            this.lblStatus.TabIndex = 7;
+            this.lblStatus.Text = "lblStatus";
+            // 
             // frmConfiguracao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 300);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.grpTipoJogo);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.grpNivelDificuldade);
@@ -170,6 +181,7 @@ namespace windows_form_ui
             this.grpTipoJogo.ResumeLayout(false);
             this.grpTipoJogo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -186,5 +198,6 @@ namespace windows_form_ui
         private System.Windows.Forms.GroupBox grpTipoJogo;
         private System.Windows.Forms.ComboBox cboJogoDaVelhaTipoJogo;
         private System.Windows.Forms.Label lblJogoDaVelhaTipoJogo;
+        private System.Windows.Forms.Label lblStatus;
     }
 }

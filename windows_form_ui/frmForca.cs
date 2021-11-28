@@ -16,18 +16,11 @@ namespace windows_form_ui
         List<string> letrasUtilizadas = new List<string>();
         List<string> palavrasPermitidas;
         int chances, acertos, erros = 0;
-        int level = 0;
-        public frmForca(Configuracao configuracao)
+        int[] chancesArray = { 26, 15, 7};
+        public frmForca()
         {   
             InitializeComponent();
-            level = configuracao.niveisUtilizados["Forca"];
             IniciaJogo();
-        }
-        private void CarregarPalavraSecreta()
-        {
-            txtPalavraSecreta.Text = "";
-            for (int i = 0; i < palavraSecreta.Length; i++)
-                txtPalavraSecreta.Text += "*";
         }
         private void LimpaLetrasUtilizadas()
         {
@@ -87,7 +80,6 @@ namespace windows_form_ui
         }
         private void IniciaContagem() 
         {
-            chances = palavraSecreta.Length;
             acertos = erros = 0;
             lblChancesValor.Text = Convert.ToString(chances);
             lblAcertosValor.Text = Convert.ToString(acertos);
@@ -96,14 +88,21 @@ namespace windows_form_ui
         }
         private void IniciaJogo()
         {
+            CarregarConfiguracao();
             CarregaPalavrasPermitidasOnlineOffline();
             NovaPalavra();
             CarregarLetrasGrid();
-            CarregarPalavraSecreta();
             IniciaContagem();
             LimpaLetrasUtilizadas();
             lblStatusJogo.Text = "Jogo iniciado!";
         }
+
+        private void CarregarConfiguracao()
+        {
+            Configuracao configuracao = Extender.LerArquivoEmAssembly<Configuracao>(new Configuracao().jsonFile);
+            chances = chancesArray[configuracao.niveisUtilizados["Forca"]];
+        }
+
         private void CarregaPalavrasPermitidasOnlineOffline()
         {
             try
@@ -171,6 +170,10 @@ namespace windows_form_ui
         {
             Random rd = new Random();
             palavraSecreta = palavrasPermitidas[rd.Next(0, palavrasPermitidas.Count())];
+
+            txtPalavraSecreta.Text = "";
+            for (int i = 0; i < palavraSecreta.Length; i++)
+                txtPalavraSecreta.Text += "*";
         }
         private void gridLetras_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) => AnalisaAcaoDoJogador(e.RowIndex, e.ColumnIndex);
         private void frmForca_KeyDown(object sender, KeyEventArgs e)

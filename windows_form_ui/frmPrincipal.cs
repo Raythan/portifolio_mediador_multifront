@@ -14,28 +14,29 @@ namespace windows_form_ui
     public partial class frmPrincipal : Form
     {
         private string titulo = "Jogos";
-        private Form form;
+
         private Dictionary<string, int> telas;
-        private Dictionary<int, Form> formularios;
+
         private int formInicial = 0;
 
         public frmPrincipal()
         {
             InitializeComponent();
-            CarregarDicionarios();
             CarregarTelasDeSelecao();
             Text = titulo;
         }
-        private void CarregarDicionarios()
+        private Dictionary<int, Form> CarregarFormularios()
         {
-            formularios = new Dictionary<int, Form>()
+            return new Dictionary<int, Form>()
             {
                 { 0, new frmConfiguracao() },
                 { 1, new frmJogoDaVelha() },
-                { 2, new frmForca(Extender.LerArquivoEmAssembly<Configuracao>(new Configuracao().jsonFile)) },
+                { 2, new frmForca() },
                 { 3, new frmQuiz() },
             };
-
+        }
+        private void CarregarTelasDeSelecao()
+        {
             telas = new Dictionary<string, int>
             {
                 { "Configuração", 0},
@@ -43,14 +44,6 @@ namespace windows_form_ui
                 { "Forca", 2},
                 { "Quiz", 3}
             };
-        }
-        private void CarregarTelasDeSelecao()
-        {
-            if (telas.Count() != formularios.Count())
-            {
-                MessageBox.Show("Quantidade de menus cadastrados diferente da quantidade de formularios", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new Exception();
-            }
 
             cboSelecaoTelaPrincipal.DataSource = new BindingSource(telas, null);
             cboSelecaoTelaPrincipal.DisplayMember = "Key";
@@ -59,8 +52,18 @@ namespace windows_form_ui
         }
         private void cboSelecaoTela_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Form form;
+            Dictionary<int, Form> formularios = new Dictionary<int, Form>();
             try
             {
+                formularios = CarregarFormularios();
+
+                if (telas.Count() != formularios.Count())
+                {
+                    MessageBox.Show("Quantidade de menus cadastrados diferente da quantidade de formularios", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new Exception();
+                }
+
                 if (panelPrincipal.Controls.Count > 0)
                     panelPrincipal.Controls.RemoveAt(0);
 
@@ -72,7 +75,7 @@ namespace windows_form_ui
                 {
                     formularios.TryGetValue(formInicial, out form);
                 }
-                
+
                 form.TopLevel = false;
                 form.AutoScroll = true;
                 panelPrincipal.Controls.Add(form);
@@ -88,7 +91,7 @@ namespace windows_form_ui
                 };
                 panelPrincipal.Controls.Add(form);
                 form.Show();
-                Text = $"{titulo} - Erro";       
+                Text = $"{titulo} - Erro";
             }
         }
     }

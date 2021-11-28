@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,5 +35,7 @@ namespace windows_form_ui
         public static bool ExisteArquivo(string nomeArquivo) => File.Exists($"{AssemblyDirectory}\\{nomeArquivo}");
         public static void CriaArquivo(string nomeArquivo) => File.Create($"{AssemblyDirectory}\\{nomeArquivo}").Dispose();
         public static void EscreveObjetoAssembly(string nomeArquivo, object objeto) => File.WriteAllText($"{AssemblyDirectory}\\{nomeArquivo}", JsonConvert.SerializeObject(objeto));
+        public static Image LerImagemAssembly(string nomeArquivo) => Image.FromFile($"{AssemblyDirectory}\\{nomeArquivo}");
+        public static Bitmap LerBitmapAssembly(string nomeArquivo) => (Bitmap)Bitmap.FromFile($"{AssemblyDirectory}\\{nomeArquivo}");
     }
 }

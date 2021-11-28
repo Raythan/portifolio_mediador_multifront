@@ -1,5 +1,10 @@
-﻿using System;
+﻿using AForge.Imaging;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace windows_form_ui
@@ -58,5 +63,60 @@ namespace windows_form_ui
             lblStatus.Text = "Configuração salva!";
         }
         private void btnSalvar_Click(object sender, EventArgs e) => SalvarConfiguracoes();
+
+        //private async void roda()
+        //{
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        //Create a new bitmap.
+        //        using (var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
+        //                                       Screen.PrimaryScreen.Bounds.Height,
+        //                                       PixelFormat.Format24bppRgb))
+        //        {
+        //            // Create a graphics object from the bitmap.
+        //            using (var gfxScreenshot = Graphics.FromImage(bmpScreenshot))
+        //            {
+        //                // Take the screenshot from the upper left corner to the right bottom corner.
+        //                gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
+        //                                            Screen.PrimaryScreen.Bounds.Y,
+        //                                            0,
+        //                                            0,
+        //                                            Screen.PrimaryScreen.Bounds.Size,
+        //                                            CopyPixelOperation.SourceCopy);
+
+        //                // Save the screenshot to the specified path that the user has chosen.
+        //                bmpScreenshot.Save(@"C:\GitHub\portifolio_mediador_multifront\windows_form_ui\bin\Debug\teste2.png", ImageFormat.Png);
+        //            };
+        //        };
+
+        //        using (Bitmap sourceImage = Extender.LerBitmapAssembly(textBox1.Text))
+        //        {
+        //            using (Bitmap template = Extender.LerBitmapAssembly(textBox2.Text))
+        //            {
+        //                ExhaustiveTemplateMatching tm = new ExhaustiveTemplateMatching(0.921f);
+
+        //                TemplateMatch[] matchings = tm.ProcessImage(sourceImage, template);
+        //                if (matchings.Length > 0)
+        //                {
+        //                    label1.Invoke((MethodInvoker)delegate {
+        //                        label1.Text = "Estou vendo.";
+        //                    });
+        //                }   
+        //                else
+        //                {
+        //                    label1.Invoke((MethodInvoker)delegate {
+        //                        label1.Text = "Não estou vendo.";
+        //                    });
+        //                }
+        //            }
+        //        };
+        //        Thread.Sleep(100);
+        //    }
+        //}
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    Task.Run(() => roda());
+        //}
     }
 }

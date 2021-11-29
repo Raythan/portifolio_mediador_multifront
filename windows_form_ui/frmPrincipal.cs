@@ -18,19 +18,21 @@ namespace windows_form_ui
         private Dictionary<string, int> telas;
 
         private int formInicial = 0;
-
+        private bool carregado = false;
         public frmPrincipal()
         {
             InitializeComponent();
             CarregarTelasDeSelecao();
             Text = titulo;
+            CenterToScreen();
+            carregado = true;
         }
         private Dictionary<int, Form> CarregarFormularios()
         {
             return new Dictionary<int, Form>()
             {
                 { 0, new frmConfiguracao() },
-                { 1, new frmJogoDaVelha() },
+                { 1, new frmJogoDaVelha(carregado) },
                 { 2, new frmForca() },
                 { 3, new frmQuiz() },
             };

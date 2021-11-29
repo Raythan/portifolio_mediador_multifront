@@ -96,13 +96,11 @@ namespace windows_form_ui
             LimpaLetrasUtilizadas();
             lblStatusJogo.Text = "Jogo iniciado!";
         }
-
         private void CarregarConfiguracao()
         {
             Configuracao configuracao = Extender.LerArquivoEmAssembly<Configuracao>(new Configuracao().jsonFile);
             chances = chancesArray[configuracao.niveisUtilizados["Forca"]];
         }
-
         private void CarregaPalavrasPermitidasOnlineOffline()
         {
             try

@@ -54,5 +54,7 @@ namespace windows_form_ui
         {
             { jogosStatic[0], 0 }
         };
+        public string ultimoJogadorUmJogoDaVelha = "";
+        public string ultimoJogadorDoisJogoDaVelha = "";
     }
 }
